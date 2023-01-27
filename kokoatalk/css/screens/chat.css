@@ -1,0 +1,210 @@
+#chat-screen{
+    background-color: #abc1d1;
+    height: 500vh;
+}
+
+#chat-screen .alt-header,
+#chat-screen .status-bar {
+    top: 0;
+    position: fixed;
+    width: 100%;
+    background-color: #abc1d1;
+    /* status bar나 header의 뒤에 오는 것들이 안보이게 하기 위함*/
+    box-sizing: border-box;
+}
+
+#chat-screen .status-bar{
+    z-index:2;
+}
+#chat-screen .alt-header {
+    top: 10px;
+    z-index: 1;
+    /* layer의 순서(status-bar와 header은 같은 레이어가 아님.), 
+    index: 절대적인(absolute) 위치나 고정된(fixed) 위치에 대해 설정할 수 있음,
+    status-bar에 더 큰 index를 줌으로써 header보다 '위'에 위치하도록 함 */
+}
+
+@keyframes fadeIn {
+   from{
+      transform: translateY(10px);
+opacity: 0;
+   }
+   to{
+      transform: none;
+opacity: 1;
+   }
+}
+
+.main-chat {
+    margin-top: 180px;
+    display: flex;
+    flex-direction: column;
+    /* 요소들이 서로 위아래로 정렬, cross axis(세로)가 수평이 됨 */
+    align-items: center;
+    /* 수평이 된 세로축을 기준으로 중앙정렬하면 요소는 가운데에 오게 됨 */
+    animation: fadeIn 0.8s linear;
+}
+ /* 고정된 요소들(status-bar와 header)에 의해 덮여있음 */
+
+ .chat__timestamp {
+    color: white;
+    background-color: #92a4b2;
+    padding: 15px;
+    font-size: 14px;
+    border-radius: 25px;
+    margin-bottom: 25px;
+ }
+
+ .message-row {
+    width: 100%;
+    display: flex;
+    margin-bottom: 25px;
+ }
+ .message-row img{
+    width: 50px;
+    height: 50px;
+    border-radius: 40%;
+    margin-right: 15px;
+ }
+ .message__author {
+    margin-bottom: 5px;
+    display: block;
+ }
+
+ .message__info {
+    display: flex;
+    align-items: flex-end;
+ }
+ /* flex container */
+
+ .message__bubble {
+    background-color: white;
+    padding: 13px;
+    font-size: 18px;
+    border-radius: 15px;
+    border-top-left-radius: 0px;
+    margin-right: 5px;
+ }
+ .message__time,
+ .message__author {
+    opacity: 0.8;
+    font-size: 13px;
+ }
+
+ .message-row--own {
+    justify-content: flex-end;
+ }
+/* message-row 가 이미 display: flex를 가지고 있음 */
+
+ .message-row--own .message__bubble {
+    background-color: var(--yellow);
+    border-top-right-radius: 0px;
+    border-top-left-radius: 15px;
+    margin-right: 0px;
+    margin-left: 5px;
+ }
+
+/* .message-row--own .message__bubble{
+order:1;
+}
+ .message-row--own .message__time{
+    order: 0;
+ }
+ 순서 변경 방법1 = css code - order: flex children에게만 적용됨 */
+
+
+ .message-row--own .message__info {
+    flex-direction: row-reverse;
+ }
+ /* 순서 변경 방법2 = row-reverse: html을 수정하지 않고 순서를 변경할 수 있음, message-row--own을 기준으로 변경 */
+
+ .reply {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 25px;
+    box-sizing: border-box;
+    align-items: center;
+    transition: transform 0.3s ease-in-out;
+ }
+
+.reply .reply__column:first-child {
+    width: 10%;
+}
+.reply .reply__column:last-child {
+    width: 90%;
+    position: relative;
+ }
+/* column에 먼저 width를 줘야하는 이유: column 자체에 width를 가지고 있지 않았기 때문 */
+
+.reply i{
+    opacity: 0.5;
+}
+
+ .reply input {
+    padding: 12px;
+    width: 100%;
+    border: var(--main-border);
+    border-radius: 20px;
+    transition: all 0.3s ease-in-out
+    /* @@@@@transition을 input에 넣어야 하는 이유@@@@@@ */
+ }
+
+ .reply__column:last-child > i,
+ .reply__column:last-child button {
+    position: absolute;
+    right: -3px;
+    top: 5px;
+ }
+
+ .reply__column:last-child > i {
+    right: 40px;
+    top: 18px;
+ }
+ /* > : direct, icon만 이동시키고 싶은데, reply__column:last-child i 로 작성하면 button까지 함께 이동함 */
+
+
+.reply__column button{
+    background-color: var(--yellow);
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.reply__column button i {
+    opacity: 1;
+}
+
+.reply__column button:focus,
+.reply__column button:active {
+    outline: none;
+}
+
+
+.reply .reply__column:first-child,
+.reply .fa-face-smile,
+.reply button {
+   transition: opacity 0.3s ease-in-out;
+}
+
+
+.reply:focus-within .reply__column:first-child,
+.reply:focus-within .fa-face-smile,
+.reply:focus-within button {
+   opacity: 0;
+}
+/* reply:focus-within: reply 내부에 focus된 element가 있는지 보는 것 */
+
+.reply input:focus {
+   width:90vw;
+   transform: translateX(-13%) translateY(-80px);
+}
+/* Write a message 부분만 올라옴 */
+.reply:focus-within {
+   transform: translateY(80px);
+}
+/* 채팅 하단 바 전체가 내려감 */

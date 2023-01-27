@@ -1,0 +1,62 @@
+#friends-display-link {
+    text-align: center;
+    display: block;
+    background-color: #fafafa;
+    padding: 15px 0px;
+    font-size: 18px;
+    margin-bottom: 10px;
+    margin-top: -15px;
+    /* screen-header.css에 margin-bottom: 15px; 이 적용되어 있어서 외관상 보기 좋지 않아서 -값을 준 것임 */
+}
+
+#friends-display-link i{
+    color: rgba(0, 0, 0, 0.3)
+}
+
+.friends-screen {
+    padding: 0px var(--horizontal-space);
+}
+
+.friends-screen__channel {
+    margin-top: 25px;
+    border-top: var(--main-border);
+    padding-top: 15px;
+}
+
+.friends-screen__channel-header{
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    color: var(--comment-gray);
+}
+
+@keyframes hidesplachscreen {
+    from{
+         opacity: 1;
+    }
+    to {
+         opacity: 0;
+         visibility: hidden;
+         /* 첫 시작 애니메이션 html은 계속 화면에 존재, 
+         visibility: hidden; 을 작성함으로써 다른 요소를 클릭하는 것에 방해되지 않게 함.
+         그래서 뭔가를 숨기거나 html을 제거하고 싶다면, JavaScript를 써야함 */
+    }
+}
+
+#splash-screen {
+    background-color: var(--yellow);
+    position: absolute;
+    height: 100vh;
+    /* 화면 높이의 100%를 의미 */
+    width: 100vw;
+    /* 화면 넓이의 100%를 의미 */
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 132px;
+    animation: hidesplachscreen 0.3s ease-in-out forwards;
+    animation-delay: 2s;
+}
+/* forwards: 마지막 keyframes을 기억함 */
+/* splash-screen이 가장 위에 위치함 */

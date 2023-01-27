@@ -1,0 +1,75 @@
+.welcome-header {
+margin: 90px 0px;
+text-align: center;
+display: flex;
+flex-direction: column;
+align-items: center;
+
+/* 이게 적용이 안된 것 같은뎅,, 원인: "-"
+<header class-="welcome-header"> 오타^^ */
+}
+
+.welcome-header__title {
+    margin-bottom: 20px;
+    font-size: 25px;
+}
+
+.welcome-header__text {
+    width: 50%;
+    opacity: 0.7;
+}
+
+#login-form{
+    display: flex;
+    flex-direction: column;
+    margin: 0px 30px;
+}
+
+#login-form input {
+    border: none;
+    padding: 15px 0px;
+    font-size: 18px;
+    margin-bottom: 25px;
+}
+
+/* #login-form input:~~~ 를 다른 방식으로 쓰면 아래와 같음.
+.login-form__input{  }
+
+.login-form__btn{  }
+
+.login-form__a{  } */
+
+
+#login-form input:not([type="submit"]){
+     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+     transition: border-color 0.3s ease-in-out;
+}
+/* 로그인 제출하기 부분에는 
+#login-form input:focus {
+border-color: var(--yellow);
+} 적용 안되게 함 */
+
+#login-form input::placeholder {
+    color: rgba(0, 0, 0, 0.4);
+}
+/* #login-form input: focus{  } 이렇게 적어도 되지만 reset.css에 코드를 추가해도 됨*/
+
+#login-form input:focus {
+border-color: var(--yellow);
+}
+
+#login-form input[type="submit"] {
+    background-color: var(--yellow);
+    cursor: pointer;
+    padding: 20px 0px;
+    border-radius: 5px;
+}
+/* cursor: not allowed, progress 등의 설정이 있음 */
+
+#login-form a{
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    font-size: 13px;
+}
+/* inherit: (inheritance 상속) : anchor가 색상을 아버지로부터 상속받아 오는 것 */
